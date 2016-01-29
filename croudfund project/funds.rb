@@ -1,4 +1,7 @@
 class Project
+  attr_accessor :name
+  attr_reader :fund, :goal
+  
   def initialize(name, fund, goal)
     @name = name
     @fund = fund
@@ -14,9 +17,13 @@ class Project
     @fund -= 15
     puts "Project #{@name} lost some funds!"
   end
+
+  def need
+    @goal - @fund
+  end
   
   def to_s
-    "Project #{@name} has $#{@fund} in fundinfg towards a goal of $#{@goal}."
+    "Project #{@name} has $#{@fund} in fundinfg towards a goal of $#{@goal} => still need $#{need}"
   end
 end
 
@@ -28,3 +35,9 @@ project1.lost
 project2.gained
 puts project1
 puts project2
+
+project1.name = 'the new LMN'
+puts project1.name
+puts project1.fund
+puts project1.goal
+puts project1.need
