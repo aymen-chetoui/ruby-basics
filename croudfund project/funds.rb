@@ -28,16 +28,38 @@ class Project
 end
 
 project1 = Project.new('LMN', 500, 3000)
-puts project1
 project2 = Project.new('XYZ', 25, 75)
-puts project2
-project1.lost
-project2.gained
-puts project1
-puts project2
+# project1.lost
+# project2.gained
+# puts project1
+# puts project2
 
-project1.name = 'the new LMN'
-puts project1.name
-puts project1.fund
-puts project1.goal
-puts project1.need
+# project1.name = 'the new LMN'
+# puts project1.name
+# puts project1.fund
+# puts project1.goal
+# puts project1.need
+
+# Arrays
+project3 = Project.new('FGH', 300, 700)
+project4 = Project.new('MNO', 200, 1100)
+
+projects = [project1, project2, project3]
+
+projects.each do |project|
+  puts "#{project.name.ljust(20,'.')}>#{project.goal}"
+end
+
+projects.pop
+projects.push(project4)
+
+projects.each do |project|
+  puts project
+end
+
+projects.each do |project|
+  project.lost
+  project.lost
+  project.gained
+  puts project
+end
