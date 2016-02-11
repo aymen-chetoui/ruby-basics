@@ -4,29 +4,33 @@ class Movie
 
   def initialize(title, rank = 0)
     @title = title.capitalize
-    @the_rank = rank
+    @rank = rank
   end
   
   def thumbs_up
-    @the_rank += 1
+    @rank += 1
   end
   
   def thumbs_down
-    @the_rank -= 1
+    @rank -= 1
   end
 
   def normalized_rank
-    @the_rank / 10
+    @rank / 10
   end
   
   def to_s
-    "#{@title} has a rank of #{@the_rank}"
+    "#{@title} has a rank of #{@rank}"
   end
   
   def normalized_rank_message
     "#{@title} has a normalizer rank of #{normalized_rank}"
   end
 end
+
+
+# Example code how to use Movie class
+# Will run only by running this file and not inheriting it
 
 if __FILE__ == $0
   movie1 = Movie.new('goonies',10)

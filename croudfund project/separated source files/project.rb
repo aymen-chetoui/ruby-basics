@@ -3,7 +3,7 @@ class Project
   attr_reader :fund, :goal
   
   def initialize(name, fund, goal)
-    @name = name
+    @name = name.upcase
     @fund = fund
     @goal = goal
   end 
