@@ -1,4 +1,5 @@
 require_relative 'project'
+require_relative 'die'
 
 class FundRequest
   def initialize(name)
@@ -16,11 +17,17 @@ class FundRequest
       puts project
     end
     @projects.each do |project|
-      project.lost
-      project.gained
+      die = Die.new   
+      number_rolled = die.roll
+      
+      if number_rolled.even?
+        project.gained
+      else
+        project.lost
+      end
       puts project
+      
     end
-    
   end
 end
 

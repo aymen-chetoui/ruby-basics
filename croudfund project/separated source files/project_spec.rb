@@ -34,5 +34,25 @@ describe Project do
     @project.lost
     @project.fund.should == @initial_fund - 15 
   end
+  
+  context 'has enough funds' do
+    before do
+      @project = Project.new('abc', 100, 100)
+    end
+    
+    it 'is ok' do
+      @project.should be_ok
+    end
+  end
+  
+  context 'has not enough funds' do
+    before do
+      @project = Project.new('abc', 50, 100)
+    end
+    
+    it 'is not ok' do
+      @project.should_not be_ok
+    end
+  end
 
 end

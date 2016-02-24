@@ -20,11 +20,24 @@ class Movie
   end
   
   def to_s
-    "#{@title} has a rank of #{@rank}"
+    "#{@title} has a rank of #{@rank} (#{status})"
   end
   
   def normalized_rank_message
     "#{@title} has a normalizer rank of #{normalized_rank}"
+  end
+  
+  def hit?
+    @rank >= 10
+  end
+  
+  def status
+    # if hit?
+    #   'Hit'
+    # else
+    #   'Flop'
+    # end  
+    hit? ? 'Hit' : 'Flop'
   end
 end
 

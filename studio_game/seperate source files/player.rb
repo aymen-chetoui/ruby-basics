@@ -36,6 +36,11 @@ class Player
   def to_s
     "I'm #{@name} with a health of #{@health} and a score of #{score}."
   end
+  
+  def strong?
+    @health > 100
+  end
+  
 end
 
 # We can replace $PROGRAM_NAME with $0

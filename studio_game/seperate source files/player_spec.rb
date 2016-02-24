@@ -5,7 +5,7 @@ describe Player do
   before do
     @initial_health = 150
     @player = Player.new("larry", @initial_health)
-    $stdout = StringIO.new #changed gloabal variable stdout to a new one in this script, to avoit puts commands
+    #$stdout = StringIO.new #changed gloabal variable stdout to a new one in this script, to avoit puts commands
   end
   
   it 'has a capitalized name' do
@@ -32,6 +32,26 @@ describe Player do
   it 'decreases health by 10 when blammed' do
     @player.blam
     @player.health.should == @initial_health - 10 
+  end
+
+  context 'has initial health of 150' do
+    before do
+      @player == Player.new('Larry', 150)
+    end
+    
+    it 'is strong' do
+      @player.should be_strong
+    end
+  end
+  
+  context 'has initial health of 50' do
+    before do
+      @player = Player.new('Larry', 50)
+    end
+    
+    it 'is not strong' do
+      @player.should_not be_strong
+    end
   end
 
 end
