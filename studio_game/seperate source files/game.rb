@@ -1,5 +1,7 @@
 require_relative 'player'
-require_relative 'die'
+#require_relative 'die'
+require_relative 'game_turn'
+
 class Game
   attr_reader :title
   def initialize(title)
@@ -17,17 +19,17 @@ class Game
      end
      
     @players.each do |player|
-      die = Die.new   
-      number_rolled = die.roll
-      
-      if number_rolled < 3
-        player.blam
-      elsif number_rolled < 5
-        puts "#{player.name} was skipped."
-      else
-        player.w00t
-      end
-      
+    #   die = Die.new   
+    #   number_rolled = die.roll
+          
+    #   if number_rolled < 3
+    #     player.blam
+    #   elsif number_rolled < 5
+    #     puts "#{player.name} was skipped."
+    #   else
+    #     player.w00t
+    #   end
+      GameTurn.take_turn(player)
       #player.blam
       #player.w00t
       #player.w00t

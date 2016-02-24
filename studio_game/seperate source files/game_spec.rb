@@ -10,6 +10,7 @@ describe Game do
     @player = Player.new("moe", @initial_health)
     
     @game.add_player(@player)
+    $stdout = StringIO.new
   end
   
   it 'w00ts the player if a high number is rolled' do

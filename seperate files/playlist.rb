@@ -1,4 +1,5 @@
 require_relative 'movie'
+require_relative 'waldorf_and_statler'
 
 class Playlist
   def initialize(name)
@@ -37,16 +38,17 @@ class Playlist
     #     movie.thumbs_up
     #     puts "#{movie.title} got a thumbs up!"
     #   end
-      case number_rolled
-      when 1..2
-        movie.thumbs_down
-        puts "#{movie.title} got a thumbs down."
-      when 3..4
-        puts "#{movie.title} was skipped."
-      else
-        movie.thumbs_up
-        puts "#{movie.title} got a thumbs up!"
-      end
+    #   case number_rolled
+    #   when 1..2
+    #     movie.thumbs_down
+    #     puts "#{movie.title} got a thumbs down."
+    #   when 3..4
+    #     puts "#{movie.title} was skipped."
+    #   else
+    #     movie.thumbs_up
+    #     puts "#{movie.title} got a thumbs up!"
+    #   end
+      WaldorAndStatler.review(movie)
       puts movie
     end  
   end
