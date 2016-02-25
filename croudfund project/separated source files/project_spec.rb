@@ -40,8 +40,8 @@ describe Project do
       @project = Project.new('abc', 100, 100)
     end
     
-    it 'is ok' do
-      @project.should be_ok
+    it 'is funded' do
+      @project.should be_funded
     end
   end
   
@@ -50,8 +50,8 @@ describe Project do
       @project = Project.new('abc', 50, 100)
     end
     
-    it 'is not ok' do
-      @project.should_not be_ok
+    it 'is not funded' do
+      @project.should_not be_funded
     end
   end
 

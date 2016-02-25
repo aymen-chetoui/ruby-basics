@@ -13,14 +13,14 @@ describe FundRequest do
   
   it 'raises funds if an even number is rolled' do
     Die.any_instance.stub(:roll).and_return(2)
-    @fundrequest.request_funding
-    @project.fund.should == @fund + 25
+    @fundrequest.request_funding(3)
+    @project.fund.should == @fund + ( 25 * 3 )
   end
   
   it 'loses funds if an odd number is rolled' do
     Die.any_instance.stub(:roll).and_return(1)
-    @fundrequest.request_funding
-    @project.fund.should == @fund - 15
+    @fundrequest.request_funding(3)
+    @project.fund.should == @fund - (15 * 3)
   end
   
 end

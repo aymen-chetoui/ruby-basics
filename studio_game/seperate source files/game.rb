@@ -12,30 +12,38 @@ class Game
   def add_player(player)
     @players << player
   end
-  def play
+  def play(rounds)
     puts "There are #{@players.size} in #{@title} :"
     @players.each do |player|
       puts player
      end
-     
-    @players.each do |player|
-    #   die = Die.new   
-    #   number_rolled = die.roll
-          
-    #   if number_rolled < 3
-    #     player.blam
-    #   elsif number_rolled < 5
-    #     puts "#{player.name} was skipped."
-    #   else
-    #     player.w00t
-    #   end
-      GameTurn.take_turn(player)
-      #player.blam
-      #player.w00t
-      #player.w00t
-      puts player
-    end
     
+    1.upto(rounds) do |round|
+      puts "\nRound #{round}:"
+      @players.each do |player|
+        GameTurn.take_turn(player)
+        puts player
+      end
+    end
+  end
+  
+  def print_stats
+    strong_players, wimpy_players = @players.partition { |player| player.strong?}
+    puts "\n#{@title} Statistics:"
+    puts "\n#{strong_players.length} Strong Players:"
+    # puts strong_players
+    strong_players.each {|player| print_name_and_health(player)}
+    puts "\n#{wimpy_players.length} Wimpy Players:"
+    # puts wimpy_players
+    wimpy_players.each {|player| print_name_and_health(player)}
+    # sorted_players = @players.sort { |a, b| b.score <=> a.score }
+    puts "\n#{@title} Top Scores:"
+    #sorted_players.each { |player| puts "#{player.name.ljust(30, '.')}#{player.score}" }
+    @players.sort.each { |player| puts "#{player.name.ljust(30, '.')}#{player.score}" }    
+  end
+  
+  def print_name_and_health(player)
+    puts "#{player.name.ljust(30, '.')}#{player.health}"
   end
 end
 

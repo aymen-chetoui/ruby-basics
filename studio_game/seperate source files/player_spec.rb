@@ -5,7 +5,7 @@ describe Player do
   before do
     @initial_health = 150
     @player = Player.new("larry", @initial_health)
-    #$stdout = StringIO.new #changed gloabal variable stdout to a new one in this script, to avoit puts commands
+    $stdout = StringIO.new #changed gloabal variable stdout to a new one in this script, to avoit puts commands
   end
   
   it 'has a capitalized name' do
@@ -53,5 +53,20 @@ describe Player do
       @player.should_not be_strong
     end
   end
+  
+  context "in a collection of players" do
+  before do
+    @player1 = Player.new("moe", 100)
+    @player2 = Player.new("larry", 200)
+    @player3 = Player.new("curly", 300)
+    
+    @players = [@player1, @player2, @player3]
+  end
+
+  it "is sorted by decreasing score" do
+    @players.sort.should == [@player3, @player2, @player1]
+  end
+  
+end
 
 end

@@ -41,6 +41,10 @@ class Player
     @health > 100
   end
   
+  def <=>(other_player)
+    other_player.score <=> score
+  end
+  
 end
 
 # We can replace $PROGRAM_NAME with $0

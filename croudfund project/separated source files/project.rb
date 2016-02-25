@@ -22,12 +22,16 @@ class Project
     @goal - @fund
   end
   
-  def ok?
+  def funded?
     @fund >= @goal
   end
   
   def to_s
     "Project #{@name} has $#{@fund} in fundinfg towards a goal of $#{@goal} => still need $#{need}"
+  end
+  
+  def <=>(other_project)
+    other_project.need <=> need
   end
 end
 
