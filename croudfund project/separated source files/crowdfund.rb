@@ -11,5 +11,5 @@ holding.add_project(project1)
 holding.add_project(project2)
 holding.add_project(project3)
 holding.add_project(project4)
-holding.request_funding(100)
+holding.request_funding(3)
 holding.print_stats
