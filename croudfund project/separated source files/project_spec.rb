@@ -54,5 +54,15 @@ describe Project do
       @project.should_not be_funded
     end
   end
+  
+  it "calculate the amount of pledges" do
+    @project.rewards.should == 0
+    @project.earn_pledge(Pledge.new(:bronze, 50))
+    @project.rewards.should == 50
+    @project.earn_pledge(Pledge.new(:silver, 75))
+    @project.rewards.should == 125
+    @project.earn_pledge(Pledge.new(:gold, 100))
+    @project.rewards.should == 225
+  end
 
 end

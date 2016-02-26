@@ -15,7 +15,8 @@ module FundingRound
     end
   
   pledge_recieved = PledgePool.random
-  puts "Project #{project.name} recieve a #{pledge_recieved.name} pledge worth $#{pledge_recieved.amount}"
+  project.earn_pledge(pledge_recieved)
+  #puts "Project #{project.name} recieve a #{pledge_recieved.name} pledge worth $#{pledge_recieved.amount}"
   
   end
 end

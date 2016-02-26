@@ -13,6 +13,10 @@ class FundRequest
     @projects << project
   end
   
+  def total_rewards
+    @projects.reduce(0) { |sum, project| sum + project.rewards }
+  end
+  
   def request_funding(weeks)
     puts "The current projects are :"
     @projects.each do |project|
@@ -38,6 +42,14 @@ class FundRequest
     under_funded_projects.each { |project| print_project_and_fund(project) }
     puts "\nStill needing funds projects (needs):"
     under_funded_projects.sort.each { |project| puts "#{project.name.ljust(30, '_')}#{project.need}" }
+    
+    puts "\nThe projects have collected a total amouts of $#{total_rewards} from pledges:"
+  
+    @projects.each do |project|
+      puts "\n#{project.name}'s total rewards:"
+      puts "$#{project.rewards} grand total pledges"
+    end 
+  
   end
   
   def print_project_and_fund(project)

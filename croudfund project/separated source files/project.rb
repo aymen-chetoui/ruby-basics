@@ -6,8 +6,20 @@ class Project
     @name = name.upcase
     @fund = fund
     @goal = goal
+    @earned_pledges = Hash.new(0)
   end 
-  
+
+  def earn_pledge(pledge)
+    @earned_pledges[pledge.name] += pledge.amount
+    @fund += pledge.amount
+    puts "#{@name} earned a #{pledge.name} pledge worth $#{pledge.amount}"
+    puts "#{@name}'s pledges: #{@earned_pledges}"
+  end
+
+  def rewards 
+    @earned_pledges.values.reduce(0, :+)
+  end
+
   def gained
     @fund += 25
     puts "Project #{@name} got more funds!"

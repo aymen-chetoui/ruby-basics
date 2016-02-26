@@ -35,8 +35,7 @@ describe Playlist do
       
       @playlist.play
       @movie.rank.should == @initial_rank - 1
-    end     
-     
+    end   
   end
 
 end

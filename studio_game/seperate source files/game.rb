@@ -14,6 +14,10 @@ class Game
     @players << player
   end
   
+  def total_points
+    @players.reduce(0) { |sum, player| sum + player.points }
+  end
+  
   def play(rounds)
     puts "There are #{@players.size} in #{@title} :"
     @players.each do |player|
@@ -45,7 +49,13 @@ class Game
     # sorted_players = @players.sort { |a, b| b.score <=> a.score }
     puts "\n#{@title} Top Scores:"
     #sorted_players.each { |player| puts "#{player.name.ljust(30, '.')}#{player.score}" }
-    @players.sort.each { |player| puts "#{player.name.ljust(30, '.')}#{player.score}" }    
+    @players.sort.each { |player| puts "#{player.name.ljust(30, '.')}#{player.score}" }
+    
+    puts "\nThe players have collected a total of #{total_points} points from treasures"
+    @players.each do |player|
+      puts "\n#{player.name}'s point totals:"
+      puts "#{player.points} grand total points"
+    end
   end
   
   def print_name_and_health(player)
