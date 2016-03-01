@@ -1,3 +1,5 @@
+require_relative 'pledge'
+
 class Project
   attr_accessor :name
   attr_reader :fund, :goal
@@ -14,6 +16,12 @@ class Project
     @fund += pledge.amount
     puts "#{@name} earned a #{pledge.name} pledge worth $#{pledge.amount}"
     puts "#{@name}'s pledges: #{@earned_pledges}"
+  end
+  
+  def each_earned_pledge
+    @earned_pledges.each do |name, amount|
+      yield Pledge.new(name, amount)
+    end
   end
 
   def rewards 

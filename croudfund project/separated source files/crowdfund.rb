@@ -11,5 +11,7 @@ holding.add_project(project1)
 holding.add_project(project2)
 holding.add_project(project3)
 holding.add_project(project4)
-holding.request_funding(3)
+holding.request_funding(100) do
+  holding.total_rewards >= 10000 # the only returned value => will be yielded to the method request funding
+end
 holding.print_stats

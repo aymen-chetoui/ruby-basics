@@ -42,6 +42,13 @@ class Movie
     @rank >= 10
   end
   
+  def each_snack
+    @snack_carbs.each do |name, carbs|
+      snack = Snack.new(name, carbs)
+      yield snack
+    end
+  end
+  
   def status
     # if hit?
     #   'Hit'

@@ -64,5 +64,29 @@ describe Project do
     @project.earn_pledge(Pledge.new(:gold, 100))
     @project.rewards.should == 225
   end
+  
+  it "yields each earned pledge and its total amount" do
+    @project.earn_pledge(Pledge.new(:bronze, 50))
+    @project.earn_pledge(Pledge.new(:bronze, 50))
+    @project.earn_pledge(Pledge.new(:bronze, 50))
+    @project.earn_pledge(Pledge.new(:silver, 75))
+    @project.earn_pledge(Pledge.new(:gold, 100))
+    @project.earn_pledge(Pledge.new(:gold, 100))
+    @project.earn_pledge(Pledge.new(:gold, 100))
+    @project.earn_pledge(Pledge.new(:gold, 100))
+    
+    
+    yielded = []
+    @project.each_earned_pledge do |pledge|
+      yielded << pledge
+    end
+    
+    
+    yielded.should == [
+      Pledge.new(:bronze, 150),
+      Pledge.new(:silver, 75),
+      Pledge.new(:gold, 400)
+    ]
+  end
 
 end

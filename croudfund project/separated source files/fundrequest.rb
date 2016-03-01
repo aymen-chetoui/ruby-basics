@@ -26,6 +26,11 @@ class FundRequest
     puts "\nThere are #{pledges.size} possible pledge amounts:"
     pledges.each { |pledge| puts "A #{pledge.name} pledge is worth $#{pledge.amount}"}
     1.upto(weeks) do |week|
+    
+    if block_given?
+      break if yield
+    end
+    
     puts "\nFund raising week #{week}:"
       @projects.each do |project|
         FundingRound.take_fund(project)
@@ -47,6 +52,9 @@ class FundRequest
   
     @projects.each do |project|
       puts "\n#{project.name}'s total rewards:"
+      project.each_earned_pledge do |pledge|
+        puts "$#{pledge.amount} total #{pledge.name} amount"
+      end
       puts "$#{project.rewards} grand total pledges"
     end 
   
