@@ -2,6 +2,8 @@ require_relative 'project'
 require_relative 'die'
 require_relative 'funding_round'
 require_relative 'pledge'
+require 'csv'
+
 
 class FundRequest
   def initialize(name)
@@ -11,6 +13,22 @@ class FundRequest
   
   def add_project(project)
     @projects << project
+  end
+  
+  def load_project(from_file)
+    CSV.foreach(from_file) do |line|
+      project = Project.new(line[0], Integer(line[1]), Integer(line[2]))
+      add_project(project)
+    end
+  end
+  
+  def save_fund_stats(to_file='fund_stats.txt')
+    File.open(to_file, 'w') do |file|
+      file.puts "#{@name} Croudfund Stats :"
+      @projects.sort.each do |project|
+        file.puts project_and_fund(project)
+      end
+    end
   end
   
   def total_rewards
@@ -42,9 +60,9 @@ class FundRequest
   def print_stats
     fully_funded_projects, under_funded_projects = @projects.partition { |project| project.funded? }
     puts "\nFully funded projects (funds):"
-    fully_funded_projects.each { |project| print_project_and_fund(project) }
+    fully_funded_projects.each { |project| puts project_and_fund(project) }
     puts "\nUnder funded projects (funds):"
-    under_funded_projects.each { |project| print_project_and_fund(project) }
+    under_funded_projects.each { |project| puts project_and_fund(project) }
     puts "\nStill needing funds projects (needs):"
     under_funded_projects.sort.each { |project| puts "#{project.name.ljust(30, '_')}#{project.need}" }
     
@@ -60,8 +78,8 @@ class FundRequest
   
   end
   
-  def print_project_and_fund(project)
-    puts "#{project.name.ljust(30, '_')}#{project.fund}"
+  def project_and_fund(project)
+    "#{project.name.ljust(30, '_')}#{project.fund}"
   end
 end
 

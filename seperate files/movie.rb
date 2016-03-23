@@ -8,6 +8,13 @@ class Movie
     @snack_carbs = Hash.new(0)
   end
   
+  # We dont have an object here to apply from csv to, so we apply it on self ie. the class itself
+  def  self.from_csv(line)
+    title, rank = line.split(',')
+    # Integer(rank) instead of rank.to_i in order to raise an exception if the rank could not be parsed to int, using to_i will return 0 
+    Movie.new(title, Integer(rank))
+  end
+  
   def ate_snack(snack)
     @snack_carbs[snack.name] += snack.carbs
     puts "#{@title} led to #{snack.carbs} #{snack.name} carbs being consumed."
@@ -32,6 +39,10 @@ class Movie
   
   def to_s
     "#{@title} has a rank of #{@rank} (#{status})"
+  end
+  
+  def to_csv
+    "#{@title},#{@rank}"
   end
   
   def normalized_rank_message
