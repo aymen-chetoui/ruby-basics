@@ -1,8 +1,11 @@
 require_relative 'pledge'
+require_relative 'fundable'
 
 class Project
-  attr_accessor :name
-  attr_reader :fund, :goal
+  include Fundable
+  
+  attr_accessor :name, :fund
+  attr_reader :goal
   
   def initialize(name, fund, goal)
     @name = name.upcase
@@ -28,31 +31,30 @@ class Project
     @earned_pledges.values.reduce(0, :+)
   end
 
-  def gained
-    @fund += 25
-    puts "Project #{@name} got more funds!"
-  end
-  
-  def lost
-    @fund -= 15
-    puts "Project #{@name} lost some funds!"
-  end
-
-  def need
-    @goal - @fund
-  end
-  
-  def funded?
-    @fund >= @goal
-  end
-  
+# Moved to fundable
+#   def gained
+#     @fund += 25
+#     puts "Project #{@name} got more funds!"
+#   end 
+#   def lost
+#     @fund -= 15
+#     puts "Project #{@name} lost some funds!"
+#   end
+#   def need
+#     @goal - @fund
+#   end
+#   def funded?
+#     @fund >= @goal
+#   end
+#   def <=>(other_project)
+#     other_project.need <=> need
+#   end
+    
   def to_s
     "Project #{@name} has $#{@fund} in fundinfg towards a goal of $#{@goal} => still need $#{need}"
   end
   
-  def <=>(other_project)
-    other_project.need <=> need
-  end
+
 end
 
 

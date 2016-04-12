@@ -1,5 +1,10 @@
+require_relative 'rankable'
+
 class Movie
-  attr_reader :rank
+  include Rankable
+  
+  # attr_reader :rank # changed to accessor attribute because the module Rankable needs to edit it
+  attr_accessor :rank
   attr_accessor :title
 
   def initialize(title, rank = 0)
@@ -24,18 +29,31 @@ class Movie
   def carbs_consumed
     @snack_carbs.values.reduce(0, :+)
   end
-  
-  def thumbs_up
-    @rank += 1
-  end
-  
-  def thumbs_down
-    @rank -= 1
-  end
 
-  def normalized_rank
-    @rank / 10
-  end
+## Moved to rankable.rb as mixins   
+#   def thumbs_up
+#     @rank += 1
+#   end
+#   def thumbs_down
+#     @rank -= 1
+#   end
+#   def normalized_rank
+#     @rank / 10
+#   end
+#   def <=>(other_movie)
+#     other_movie.rank <=> @rank
+#   end
+#   def status
+#     # if hit?
+#     #   'Hit'
+#     # else
+#     #   'Flop'
+#     # end  
+#     hit? ? 'Hit' : 'Flop'
+#   end
+#   def hit?
+#     @rank >= 10
+#   end
   
   def to_s
     "#{@title} has a rank of #{@rank} (#{status})"
@@ -49,9 +67,7 @@ class Movie
     "#{@title} has a normalizer rank of #{normalized_rank}"
   end
   
-  def hit?
-    @rank >= 10
-  end
+
   
   def each_snack
     @snack_carbs.each do |name, carbs|
@@ -60,17 +76,8 @@ class Movie
     end
   end
   
-  def status
-    # if hit?
-    #   'Hit'
-    # else
-    #   'Flop'
-    # end  
-    hit? ? 'Hit' : 'Flop'
-  end
-  def <=>(other_movie)
-    other_movie.rank <=> @rank
-  end
+
+
 end
 
 

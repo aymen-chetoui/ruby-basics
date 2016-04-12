@@ -32,7 +32,7 @@ loop do
     holding.print_stats
     break
   else
-    puts "Pleae enter a valid number or 'quit'"
+    puts "Please enter a valid number or 'quit'"
   end    
 end
 

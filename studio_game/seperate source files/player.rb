@@ -1,8 +1,13 @@
 require_relative 'treasure_trove'
+require_relative 'playable'
 
 class Player
+
+  include Playable
+  
   attr_accessor :name
-  attr_reader :health
+  attr_accessor :health  # now health can be changed from outside he class: from Playable module
+  # attr_reader :health
   
   def initialize(name, health = 100)
     @name = name.capitalize
@@ -24,17 +29,20 @@ class Player
   def points 
     @found_treasures.values.reduce(0, :+)
   end
-  
-  def blam
-    @health -= 10
-    puts "#{@name} <<< BLAMMED (-10)"
-  end
-  
-  def w00t
-    @health += 15
-    puts "#{@name} +++ W00TED +++ (+15)"
-  end
-  
+
+# Moved to playable.rb as mixins  
+#   def blam
+#     @health -= 10
+#     puts "#{@name} <<< BLAMMED (-10)"
+#   end 
+#   def w00t
+#     @health += 15
+#     puts "#{@name} +++ W00TED +++ (+15)"
+#   end
+#   def strong?
+#     @health > 100
+#   end
+    
   def score
     #@name.length + @health
     @health + points
@@ -54,10 +62,6 @@ class Player
  
   def to_s
     "I'm #{@name} with health = #{@health}, points = #{points}, and score = #{score}."
-  end
-  
-  def strong?
-    @health > 100
   end
   
   def <=>(other_player)

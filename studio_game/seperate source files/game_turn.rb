@@ -1,11 +1,14 @@
 require_relative 'player'
 require_relative 'die'
 require_relative 'treasure_trove'
+# require_relative 'loaded_die'
 
 module GameTurn
 
   def self.take_turn(player)
-    die = Die.new   
+    # Change Die with LoadedDie : rigged die
+    # die = LoadedDie.new   
+   die = Die.new 
     number_rolled = die.roll
     if number_rolled < 3
       player.blam

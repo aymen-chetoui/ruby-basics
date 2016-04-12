@@ -2,6 +2,7 @@ require_relative 'player'
 
 class ClumsyPlayer < Player
 
+  attr_reader :boost_factor
   def initialize(name, health=100, boost_factor=1)
     super(name, health)
     @boost_factor = boost_factor
