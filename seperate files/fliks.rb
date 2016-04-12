@@ -1,4 +1,5 @@
 require_relative 'playlist'
+require_relative 'movie3d'
 
 # movie1 = Movie.new('goonies',10)
 # movie2 = Movie.new('up', 5)
@@ -15,6 +16,9 @@ playlist = Playlist.new('Kermit')
 
 playlist.load( ARGV.shift || 'movies.csv') # From command line : ruby fliks.rb superheros_movies.csv
 # The command-line arguments are accessible in the global array ARGV. Use the shift command to return the first command-line argument (the CSV file name). If there are no command-line arguments, use the || operator to load the default player file.
+
+movie3d = Movie3D.new('glee', 5, 20)
+playlist.add_movie(movie3d)
 
 # playlist1.play(3)
 # playlist1.print_stats

@@ -1,5 +1,6 @@
 require_relative 'project'
 require_relative 'fundrequest'
+require_relative 'grant_project'
 
 # project1 = Project.new('LMN', 500, 3000)
 # project2 = Project.new('XYZ', 25, 75)
@@ -18,8 +19,11 @@ holding = FundRequest.new('VC-Friendly Start-up Projects')
 
 holding.load_project(ARGV.shift || 'projects.csv')
 
+grant_pr = GrantProject.new('grt', 700, 4000, 0.6)
+holding.add_project(grant_pr)
+
 loop do
-  puts "\nHow many croudfund weeks? (type 'quite' to exit)"
+  puts "\nHow many croudfund weeks? (type 'quit' to exit)"
   answer = gets.chomp.downcase
   case answer
   when /^\d+$/
